@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initial') {
+            steps {
+                script {
+                    echo "Looking up build record for previous build status"
+                    def data = readYaml file: "version.yaml"
+                    def version = data.version
+                    sh "curl -f http://192.168.1.10:8081/apilookup/${version}"
+                }
+            }
+        }
+    }
+}
