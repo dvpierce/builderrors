@@ -8,9 +8,7 @@ pipeline {
                     echo "Looking up build record for previous build status"
                     def data = readYaml file: "version.yaml"
                     def version = data.version
-                    def buildrecord = sh script: "curl -f http://192.168.1.10:8081/buildrecord", returnStdout: true
-                    buildrecord = readJSON text: buildrecord
-                    
+                    def buildrecord = sh script: "curl -f http://192.168.1.10:8081/buildrecord", returnStdout: true                    
                     echo buildrecord
                 }
             }
