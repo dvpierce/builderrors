@@ -9,7 +9,7 @@ pipeline {
                     def data = readYaml file: "version.yaml"
                     def version = data.version
                     def buildrecord = sh script: "curl -f http://192.168.1.10:8081/buildrecord", returnStdout: true
-                    buildrecord = readJson text: buildrecord
+                    buildrecord = readJSON text: buildrecord
                     
                     echo buildrecord
                 }
