@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initial') {
+            steps {
+                script {
+                    echo "Looking up build record for previous build status"
+                    def data = readYaml file: "version.yaml"
+                    def version = data.version
+                    def buildrecord = sh script: "curl -f http://192.168.1.10:8081/buildrecord", returnStdout: true
+                    buildrecord = readJson text: buildrecord
+                    
+                    echo buildrecord
+                }
+            }
+        }
+        stage('Style Check') {
+            steps {
+                script {
+                    sh "python -m flake8 application.py"
+                }
+            }
+        }
+    }
+}
