@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo "Connecting to server 192.168.1.10"
-                    sh "curl -u 'dave':'password' http://192.168.1.10/permissionError"
+                    sh "curl -u 'dave':'password' http://192.168.1.10:8081/permissionError"
                 }
             }
         }
