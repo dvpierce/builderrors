@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initial') {
+            steps {
+                script {
+                    echo "Connecting to server unknown-dns.home"
+                    def data = readYaml file: "version.yaml"
+                    def version = data.version
+                    sh "curl -f http://unknown-dns.home/api"
+                }
+            }
+        }
+    }
+}
